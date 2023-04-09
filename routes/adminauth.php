@@ -12,10 +12,10 @@ use App\Http\Controllers\AdminAuth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware'=>['guest:admin'] , 'prefix' => 'admin'],function () {
-    Route::get('register', [RegisteredUserController::class, 'create'])
-                ->name('admin.register');
+    // Route::get('register', [RegisteredUserController::class, 'create'])
+    //             ->name('admin.register');
 
-    Route::post('register', [RegisteredUserController::class, 'store'])->name('admin.adminregister');
+    // Route::post('register', [RegisteredUserController::class, 'store'])->name('admin.adminregister');
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
                 ->name('admin.login');

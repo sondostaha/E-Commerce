@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Categories;
 use App\Models\SubCategories;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -42,6 +43,7 @@ class AdminController extends Controller
 
         
         Categories::create([
+            'admin_id' => Auth::id(),
             'name' => $request->name,
             'description' => $request->description,
             'image' => $image_name,
@@ -77,6 +79,7 @@ class AdminController extends Controller
             $image->move(public_path("category/images/"),"$image_name");
 
             $category->updated([
+                'admin_id' => Auth::id(),
                 'name' => $request->name,
                 'description' => $request->description,
                 'image' => $image_name
@@ -126,6 +129,7 @@ class AdminController extends Controller
         $image->move(public_path("category/sub_categories/images/"),"$image_name");
 
         SubCategories::create([
+            'admin_id' => Auth::id(),
             'category_id' => $request->category,
             'name' => $request->name,
             'description' => $request->description,
@@ -163,6 +167,7 @@ class AdminController extends Controller
             $image->move(public_path("category/sub_categories/images/"),"$image_name");
     
             $sub_categories->create([
+                'admin_id' => Auth::id(),
                 'category_id' => $request->category,
                 'name' => $request->name,
                 'description' => $request->description,

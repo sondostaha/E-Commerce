@@ -15,33 +15,74 @@
             <p>Dashboard</p>
           </a>
         </li>
+        @can('categories')
+       
         <li class="nav-item ">
           <a class="nav-link" href="{{ route('admin.category') }}">
             <i class="material-icons">Categories</i>
             <p>Categories</p>
           </a>
         </li>
-
+        @endcan
+        @can('add-category')
         <li class="nav-item ">
           <a class="nav-link" href="{{ route('admin.addCategory') }}">
             <i class="material-icons">Add</i>
             <p>Add Categories</p>
           </a>
         </li>
+        @endcan
 
+        @can('sub-categories')
+          
+      
         <li class="nav-item ">
           <a class="nav-link" href="{{ route('admin.sub_categories') }}">
             <i class="material-icons">Sub</i>
             <p>Sub Categories</p>
           </a>
         </li>
-
+        @endcan
+        @can('add-sub-category')
         <li class="nav-item ">
           <a class="nav-link" href="{{ route('admin.add.sub_categories') }}">
             <i class="material-icons">Add</i>
             <p>Add Sub Categories</p>
           </a>
         </li>
+
+        @endcan
+       
+        @can('add-admin')
+        <li class="nav-item ">
+          <a class="nav-link" href="{{ route('admins.create') }}">
+            <i class="material-icons">Add</i>
+            <p>Add Admin </p>
+          </a>
+        </li>
+
+        @endcan
+       
+        @can('show-admin')
+        <li class="nav-item ">
+          <a class="nav-link" href="{{ route('admins.index') }}">
+            <i class="material-icons">Show</i>
+            <p> Show Admins</p>
+          </a>
+        </li>
+
+        @endcan
+       
+        @can('role-list')
+          
+        
+        <li class="nav-item ">
+          <a class="nav-link" href="{{ route('roles.index') }}">
+            <i class="material-icons">P</i>
+            <p>Admin Permission</p>
+          </a>
+        </li>
+        @endcan
 
         <li class="nav-item ">
           <a class="nav-link" href="./rtl.html">
