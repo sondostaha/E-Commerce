@@ -24,11 +24,11 @@ class Product extends Model
 
     public function sub_category()
     {
-        return $this->belongsTo(SubCategories::class ,'product_id','id');
+        return $this->belongsTo(SubCategories::class ,'sub_category_id','id');
     }
 
-    public function provider()
+    public function providers()
     {
-        return $this->belongsTo(Provider::class );
+        return $this->hasMany(Provider::class,'id','provider_id');
     }
 }

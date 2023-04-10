@@ -4,13 +4,13 @@
 
       Tip 2: you can also add an image using data-image tag
   -->
-    <div class="logo"><a href="http://www.creative-tim.com" class="simple-text logo-normal">
+    <div class="logo"><a href="{{ route('provider.dashboard') }}" class="simple-text logo-normal">
         E-Commerce Privder
       </a></div>
     <div class="sidebar-wrapper">
       <ul class="nav">
         <li class="nav-item active  ">
-          <a class="nav-link" href="./dashboard.html">
+          <a class="nav-link" href="{{route('provider.dashboard')}}">
             <i class="material-icons">dashboard</i>
             <p>Dashboard</p>
           </a>
@@ -20,6 +20,13 @@
           <a class="nav-link" href="{{ route('provider.categories') }}">
             <i class="material-icons">Sub</i>
             <p>Sub Categories</p>
+          </a>
+        </li>
+
+        <li class="nav-item ">
+          <a class="nav-link" href="{{ route('add.products') }}">
+            <i class="material-icons">Add</i>
+            <p>Add Products</p>
           </a>
         </li>
 

@@ -97,5 +97,19 @@ Route::group([ 'middleware' => ['auth:provider', 'verified'] , 'prefix' => 'prov
 {
     Route::get('dashboard',[ProviderController::class ,'index'])->name('provider.dashboard');
     Route::get('sub_categories',[ProviderController::class , 'allSubCategories'])->name('provider.categories');
+
+    //craete products
+    Route::get('add/products' ,[ProviderController::class , 'add_products'])->name('add.products');
+    Route::post('store/products',[ProviderController::class , 'store_products'])->name('store.products');
+
+    //edite product
+    Route::get('edite/product/{id}',[ProviderController::class ,'edit_product'])->name('edite.product');
+    Route::post('update/product/{id}',[ProviderController::class, 'update_product' ])->name('upadet.product');
+
+    //delete product
+    Route::get('delete/product/{id}',[ProviderController::class ,'delete_product' ])->name('delete.product');
+
+    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
+                    ->name('provider.logout');
 });
 

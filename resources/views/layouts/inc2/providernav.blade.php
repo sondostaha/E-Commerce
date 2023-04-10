@@ -56,9 +56,9 @@
               <a class="dropdown-item" href="#">Profile</a>
               <a class="dropdown-item" href="#">Settings</a>
               <div class="dropdown-divider"></div>
-            <form method="POST" action="{{ route('admin.logout') }}">
+            <form method="POST" action="{{ route('provider.logout') }}">
                 @csrf
-              <a class="dropdown-item" href="{{route('admin.logout')}}"
+              <a class="dropdown-item" href="{{route('provider.logout')}}"
               onclick="event.preventDefault();this.closest('form').submit();">
                 {{ __('Log Out') }}
              </a>

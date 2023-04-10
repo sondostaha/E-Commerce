@@ -18,8 +18,12 @@ return new class extends Migration
             $table->foreignId('provider_id')->constrained('providers')->cascadeOnDelete();
             $table->string('name');
             $table->decimal('price');
-            $table->foreignId('cagory_id')->constrained('categories')->cascadeOnDelete();
+            // $table->foreignId('cagory_id')->constrained('categories')->cascadeOnDelete();
             $table->foreignId('sub_category_id')->constrained('sub_categories')->cascadeOnDelete();
+            $table->longText('description');
+            $table->string('original_price');
+            $table->string('selling_price');
+            $table->string('quantity');
             $table->timestamps();
         });
     }

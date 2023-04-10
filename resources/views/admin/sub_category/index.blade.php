@@ -27,21 +27,21 @@
                 </thead>
                 <tbody>
                     <?php $i=0 ?>
-                    @foreach ($sub_categories as $category)
+                    @foreach ($sub_categories as $categori)
                         
                     
                         <?php $i++?>
                     
                     <tr>
                         <td>{{$i}}</td>
-                        <td>{{$category->category->name}}</td>
+                        <td>{{$categori->category->name}}</td>
 
                         <td>
-                            <a href="#">{{$category->name}}</a>
+                            <a href="#">{{$categori->name}}</a>
                             </td>
-                        <td>{{$category->description}}</td>
+                        <td>{{$categori->description}}</td>
                      
-                      <td> <img src="{{asset('category/sub_categories/images/'.$category->image)}}" 
+                      <td> <img src="{{asset('category/sub_categories/images/'.$categori->image)}}" 
                         style="width:150px; height:150px;"> </td>
                         </td>
                         <td>
@@ -49,10 +49,10 @@
                                 <button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-primary"
                                 data-toggle="dropdown" id="dropdownMenuButton" type="button"> Options<i class="fas fa-caret-down ml-1"></i></button>
                                 <div  class="dropdown-menu tx-13">
-                                    <a class="dropdown-item" href="{{route('edit.sub_category',$category->id)}}" class="text-info fas fa-trash-alt">Edite </a>
+                                    <a class="dropdown-item" href="{{route('edit.sub_category',$categori->id)}}" class="text-info fas fa-trash-alt">Edite </a>
 
                                     
-                                    <a class="dropdown-item" href="{{ route('delete.sub_category',$category->id) }}" class="text-danger fas fa-trash-alt">Delete</a>
+                                    <a class="dropdown-item" href="{{ route('delete.sub_category',$categori->id) }}" class="text-danger fas fa-trash-alt">Delete</a>
                                     
                                 </div>
                             </div>
