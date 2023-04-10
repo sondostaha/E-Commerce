@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Provider;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categories;
 use App\Models\Product;
 use App\Models\SubCategories;
 use Illuminate\Http\Request;
@@ -13,6 +14,7 @@ class ProviderController extends Controller
     public function index()
     {
         $products = Product::with('sub_category')->get();
+        
         return view('provider.index',compact('products'));
     }
 

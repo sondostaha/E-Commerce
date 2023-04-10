@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\ProviderAuth\RegisteredUserController;
 use App\Http\Controllers\AdminAuth\AuthenticatedSessionController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Provider\ProviderController;
 use App\Http\Controllers\ProviderAuth\AuthenticatedSessionController as ProviderAuthAuthenticatedSessionController;
 
@@ -21,13 +22,20 @@ use App\Http\Controllers\ProviderAuth\AuthenticatedSessionController as Provider
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/',[FrontendController::class ,'index'])->name('frontend');
+//categories
+Route::get('categories',[FrontendController::class ,'category'])->name('categories');
+//show categories
+Route::get('show/categories/{id}',[FrontendController::class ,'showcategory' ])->name('show.categories');
+
+//subcategories
+Route::get('sub_categories',[FrontendController::class ,'sub_categories'])->name('categories');
+//show sub_categories
+Route::get('show/sub_categories/{id}',[FrontendController::class ,'showSub_category' ])->name('show.sub_categories');
+
+Route::get('/dashboard',[FrontendController::class ,'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -42,9 +50,19 @@ require __DIR__.'/client_auth.php';
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[FrontendController::class ,'index'])->name('frontend');
+//categories
+Route::get('categories',[FrontendController::class ,'category'])->name('categories');
+//show categories
+Route::get('show/categories/{id}',[FrontendController::class ,'showcategory' ])->name('show.categories');
+
+//subcategories
+Route::get('sub_categories',[FrontendController::class ,'sub_categories'])->name('categories');
+//show sub_categories
+Route::get('show/sub_categories/{id}',[FrontendController::class ,'showSub_category' ])->name('show.sub_categories');
+
+
+
 
 
 Route::group([ 'middleware' => ['auth:admin', 'verified'] , 'prefix' => 'admin' ], function()
@@ -81,6 +99,20 @@ Route::group([ 'middleware' => ['auth:admin', 'verified'] , 'prefix' => 'admin' 
 });
 require __DIR__.'/adminauth.php';
 
+
+Route::get('/',[FrontendController::class ,'index'])->name('frontend');
+//categories
+Route::get('categories',[FrontendController::class ,'category'])->name('categories');
+//show categories
+Route::get('show/categories/{id}',[FrontendController::class ,'showcategory' ])->name('show.categories');
+
+//subcategories
+Route::get('sub_categories',[FrontendController::class ,'sub_categories'])->name('categories');
+//show sub_categories
+Route::get('show/sub_categories/{id}',[FrontendController::class ,'showSub_category' ])->name('show.sub_categories');
+
+Route::get('/dashboard',[FrontendController::class ,'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
 Route::namespace('provider')->prefix('provider')->name('provider.')->group( function() {
     Route::namespace('Auth')->group(function(){
         
@@ -108,6 +140,8 @@ Route::group([ 'middleware' => ['auth:provider', 'verified'] , 'prefix' => 'prov
 
     //delete product
     Route::get('delete/product/{id}',[ProviderController::class ,'delete_product' ])->name('delete.product');
+
+    
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                     ->name('provider.logout');
