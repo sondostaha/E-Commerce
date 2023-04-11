@@ -12,7 +12,7 @@ class Product extends Model
 
     protected $guarded =[];
 
-    public function product_deltail()
+    public function product_detail()
     {
         return $this->belongsTo(ProductDetails::class ,'product_id','id');
     }
@@ -30,5 +30,14 @@ class Product extends Model
     public function providers()
     {
         return $this->hasMany(Provider::class,'id','provider_id');
+    }
+
+    public function wishlist()
+    {
+        return $this->belongsTo(Favourite::class ,'product_id','id');
+    }
+    public function cart()
+    {
+        return $this->belongsTo(Carts::class ,'id');
     }
 }

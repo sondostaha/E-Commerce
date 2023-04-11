@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Provider;
 use App\Http\Controllers\Controller;
 use App\Models\Categories;
 use App\Models\Product;
+use App\Models\ProductDetails;
 use App\Models\SubCategories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,7 @@ class ProviderController extends Controller
 {
     public function index()
     {
-        $products = Product::with('sub_category')->get();
+        $products = Product::with('sub_category')->where('provider_id',Auth::id())->get();
         
         return view('provider.index',compact('products'));
     }
@@ -109,6 +110,40 @@ class ProviderController extends Controller
         session()->flash('Delete','Product delete Successfully');
         return back();
 
+    }
+
+    public function product_details($id)
+    {
+        $product = Product::findOrFail($id);
+        
+        return view('provider.products.add_products_details',compact('product'));
+    }
+
+    public function store_details($id , Request $request)
+    {
+        $product = Product::findOrFail($id);
+
+        $request->validate([
+            'color' => 'required',
+            'size' => 'required',
+        ]);
+
+        ProductDetails::create([
+            'product_id' => $product->id,
+            'color' => $request->color,
+            'size' => $request->size
+        ]);
+
+        session()->flash('Add','Product Added Successfully');
+        return back();
+    }
+    public function show_details($id)
+    {
+        $product = Product::with('product_detail')->findOrFail($id);
+        $product['productdetail'] = ProductDetails::where('product_id',$id)->get();
+        //$details = ProductDetails::with('products')->where('product_id',$id)->get();
+        //dd($product);
+        return view('provider.products.show',compact('product'));
     }
 
 }

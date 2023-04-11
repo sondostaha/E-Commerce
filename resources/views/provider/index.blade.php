@@ -13,17 +13,18 @@
     <div class="card">
         <div class="card-body">
           
-            <table id="example" class="table key-buttons text-md-nowrap">
+            <table id="example" class="table table-bordered tabel-striped">
                 <thead>
                     <tr>
                         <th class="border-bottom-0">ID</th>
                         <th class="border-bottom-0">Sun Category name</th>
                         <th class="border-bottom-0"> Product Name </th>
                         <th class="border-bottom-0">Description</th>
-                        <th class="border-bottom-0">Image</th>
                         <th class="border-bottom-0">Original Price</th>
                         <th class="border-bottom-0">Selling Price</th>
                         <th class="border-bottom-0">Quantity</th>
+                        <th class="border-bottom-0">Image</th>
+
                         <th class="border-bottom-0">Options</th>
 
                         
@@ -42,7 +43,7 @@
                         <td>{{$product->sub_category->name}}</td>
 
                         <td>
-                            <a href="#">{{$product->name}}</a>
+                            <a href="{{ route('show.details',$product->id) }}">{{$product->name}}</a>
                             </td>
                         <td>{{$product->description}}</td>
 
@@ -64,6 +65,8 @@
                                 <button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-primary"
                                 data-toggle="dropdown" id="dropdownMenuButton" type="button"> Options<i class="fas fa-caret-down ml-1"></i></button>
                                 <div  class="dropdown-menu tx-13">
+                                    <a class="dropdown-item" href="{{route('add.product.details',$product->id)}}" class="text-info fas fa-trash-alt">Add more details </a>
+
                                     <a class="dropdown-item" href="{{route('edite.product',$product->id)}}" class="text-info fas fa-trash-alt">Edite </a>
 
                                     

@@ -18,11 +18,12 @@
                         @foreach ($categories as $category )
                         <div class="col-md-4 mb-3">
                             <div class="card">
+                                <a href="{{route('show.sub_categories',$category->id)}}">
                                 <img src="{{ asset('category/images/'.$category->image) }}" alt="Product Image">
                                 <div class="card-body">
                                     <h5><a href="{{route('show.categories',$category->id)}}">{{$category->name}}</a></h5>
                                     <p>{{$category->description}}</p>
-                                
+                                </a>
                                 </div>
                             </div>
                         </div>

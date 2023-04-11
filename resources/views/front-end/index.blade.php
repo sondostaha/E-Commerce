@@ -16,12 +16,13 @@
                     @foreach ($products as $product )
                         <div class="item">
                             <div class="card">
+                                <a href="{{ route('show.products',$product->id) }}">
                                 <img src="{{ asset('products/'.$product->image) }}" alt="Product Image">
                                 <div class="card-body">
                                     <h5>{{$product->name}}</h5>
                                     <span class="float-start">${{$product->selling_price}}</span>
                                     <span class="float-end"><s>${{$product->original_price}}</s></span>
-
+                                </a>
                                 </div>
                             </div>
                         </div>

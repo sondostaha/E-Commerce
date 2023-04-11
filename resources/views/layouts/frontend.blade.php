@@ -12,15 +12,21 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-        <link id="pagestyle" href="{{asset('frontend/css/bootstrap.min.css')}}" rel="stylesheet" />
-        <link id="pagestyle" href="{{asset('frontend/css/bootstrap.css')}}" rel="stylesheet" />
-        {{-- <link id="pagestyle" href="{{asset('frontend/css/bootstrap.rlt.css')}}" rel="stylesheet" />
-        <link id="pagestyle" href="{{asset('frontend/css/bootstrap.rlt.min.css')}}" rel="stylesheet" /> --}}
+        <link id="pagestyle" href="{{asset('frontend/css/bootstrap.min.css')}}" rel="stylesheet" >
+        <link id="pagestyle" href="{{asset('frontend/css/bootstrap.css')}}" rel="stylesheet" >
+         <link id="pagestyle" href="{{asset('frontend/css/custom.css')}}" rel="stylesheet" > 
+       <link id="pagestyle" href="{{asset('frontend/css/bootstrap.rlt.min.css')}}" rel="stylesheet" />
         <link id="pagestyle" href="{{asset('frontend/css/owl.carousel.min.css')}}" rel="stylesheet" />
         <link id="pagestyle" href="{{asset('frontend/css/owl.theme.default.min.css')}}" rel="stylesheet" />
+       
+        {{-- font awesome --}}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css"
+         integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
 
-
-
+{{-- FONT--}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;400;800&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 
 
 
@@ -29,7 +35,14 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
+        @guest
      @include('layouts.inc3.frontendnav')
+            
+        @endguest
+
+        @auth
+            @include('layouts.inc3.clientnav')
+        @endauth
   <div class="wrapper ">
    
         <div class="content">
