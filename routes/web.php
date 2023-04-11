@@ -38,16 +38,22 @@ Route::get('view/product/{id}',[FrontendController::class ,'show_product'])->nam
 
 Route::get('/dashboard',[FrontendController::class ,'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () 
+{
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy']) ->name('logout');
-                
+    Route::get('logout', [AuthenticatedSessionController::class, 'destroy']) ->name('logout');
+   
+
     //cart
     Route::get('carts',[FrontendController::class ,'cart' ])->name('allcart');
     //add to card
     Route::post('add/cart/product/{id}',[FrontendController::class , 'addToCart' ])->name('add.product.cart');
+    //edite 
+    Route::get('edite/cart/{id}',[FrontendController::class , 'edite_cart'])->name('edite.cart');
+    Route::post('update/cart/{id}',[FrontendController::class , 'update_cart'])->name('update.cart');
+
     //delete cart
     Route::get('delete/cart/{id}',[FrontendController::class ,'delete_cart'])->name('delete.cart');
 

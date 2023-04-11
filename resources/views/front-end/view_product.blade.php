@@ -23,6 +23,20 @@
        </button>
    </div>
    @endif
+
+   @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Wrong</strong>
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
    
    @if (session()->has('exist'))
    <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -85,7 +99,7 @@
                             <div class="col-md-10">
                             <br/>
                                 <a type="button" href="{{ route('add.product.add_wishlist',$product->id) }}" class="btn btn-success me-3 float-start">Add To Wishlist <i class="fa fa-heart"></i></a>
-                                <button type="submit"  class="btn btn-primary me-3 float-start">Add To Card   <i class="fa fa-shopping-cart"></i></button>
+                                <button type="submit"  class="btn btn-primary me-3 float-start" aria-placeholder="Add To Card">Add To Card   <i class="fa fa-shopping-cart"></i></button>
 
                             </div>
                             <p class="mt-3">

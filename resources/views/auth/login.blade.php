@@ -11,7 +11,7 @@
 </div>
 @endif
 
-    <form method="POST" action="{{ route('login') }}">
+    <form method="POST" action="{{ route('handel_login') }}">
         @csrf
         
         <h1 class="block mt-1 w-full">Client Login</h1>

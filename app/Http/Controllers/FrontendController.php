@@ -74,7 +74,9 @@ class FrontendController extends Controller
                 else
                 {
                    
-
+                    $request->validate([
+                        'quantity' => 'required',
+                    ]);
                     Carts::create([
                         'product_id' => $id,
                         'user_id' => Auth::id(),
@@ -107,7 +109,7 @@ class FrontendController extends Controller
                 else
                 {
                    
-
+                    
                     Favourite::create([
                         'product_id' => $id,
                         'user_id' => Auth::id(),
@@ -153,6 +155,24 @@ class FrontendController extends Controller
 
         $wish->delete($id);
         session()->flash('Delete','Deleted successfully');
+        return back();
+    }
+
+    public function edite_cart($id)
+    {
+        $cart = Carts::with('product')->findOrFail($id);
+
+        return view('front-end.editCard',compact('cart'));
+    }
+    public function update_cart($id , Request $request)
+    {
+        $cart = Carts::findOrFail($id);
+
+        $cart->update([
+            'quantity' => $request->quantity
+        ]);
+
+        session()->flash('Edite' ,'quantity updated successfully');
         return back();
     }
 }

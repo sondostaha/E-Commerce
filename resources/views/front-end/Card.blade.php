@@ -45,7 +45,10 @@
                             <a href="{{ route('show.products',$cart->product->id) }}">{{$cart->product->name}}</a>
                             </td>
                         <td>${{$cart->product->selling_price}}</td>
-                        <td>{{$cart->quantity}}</td>
+                        <td>{{$cart->quantity}}
+                            <br>
+                            <a href="{{ route('edite.cart',$cart->id) }}" class="btn btn-info">Edite</a>
+                        </td>
                      
                         
                         <td>
