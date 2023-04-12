@@ -77,6 +77,9 @@ Route::group([ 'middleware' => ['auth:admin', 'verified'] , 'prefix' => 'admin' 
                 //delete sub category
                 Route::get('delete/{id}',[AdminController::class ,'deleteSubCategories'])->name('delete.sub_category');
             });
+
+            //order 
+            Route::get('orders',[AdminController::class , 'orders'])->name('allorders');
            
         
            

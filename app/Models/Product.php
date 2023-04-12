@@ -17,9 +17,9 @@ class Product extends Model
         return $this->belongsTo(ProductDetails::class ,'product_id','id');
     }
 
-    public function order()
+    public function order_detail()
     {
-        return $this->belongsTo(Order::class ,'product_id','id');
+        return $this->belongsTo(OrderDetails::class ,'product_id','id');
     }
 
     public function sub_category()

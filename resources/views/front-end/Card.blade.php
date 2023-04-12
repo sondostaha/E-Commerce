@@ -12,7 +12,7 @@
 
     <div class="card">
         <div class="card-body">
-          
+          @if($carts->count() >0)
             <table id="example" class="table table-bordered tabel-striped">
                 <thead>
                     <tr>
@@ -46,8 +46,11 @@
                             </td>
                         <td>${{$cart->product->selling_price}}</td>
                         <td>{{$cart->quantity}}
-                            <br>
+                            
+                            <div class="pull-right">
+
                             <a href="{{ route('edite.cart',$cart->id) }}" class="btn btn-info">Edite</a>
+                            </div>
                         </td>
                      
                         
@@ -59,12 +62,23 @@
                     @php $total += $cart->product->selling_price * $cart->quantity; @endphp
                    
                     @endforeach
+                    
                 </tbody>
+               
                 <div class="card-footer">
                     <h1>Total Price = {{$total}}</h1>
                 </div>
             </table>
-            
+            <div class="pull-left">
+                <a class="btn btn-success" href="{{ route('ckeckout') }}"> CheckOut</a>
+            </div>
+            @else
+            <div class="card-body text-center">
+                <p> Your <i class="fa fa-shopping-cart"> Cart Is Empty </i></p>
+                <a href="{{url('/')}}" class="btn btn-outline-primary float-end">Shooping now</a>
+            </div>
+           
+            @endif
         </div>
         
         

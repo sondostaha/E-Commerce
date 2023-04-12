@@ -85,9 +85,9 @@
         @endcan
 
         <li class="nav-item ">
-          <a class="nav-link" href="./rtl.html">
-            <i class="material-icons">language</i>
-            <p>RTL Support</p>
+          <a class="nav-link" href="{{ route('allorders') }}">
+            <i class="material-icons">Orders</i>
+            <p>Orders</p>
           </a>
         </li>
         <li class="nav-item active-pro ">

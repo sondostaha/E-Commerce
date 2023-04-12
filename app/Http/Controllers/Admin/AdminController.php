@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Categories;
+use App\Models\Order;
 use App\Models\SubCategories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -192,6 +193,12 @@ class AdminController extends Controller
         $sub_categories->delete($id);
         session()->flash('Delete', 'Sub_Category Deleted Successfully');
         return back();
+    }
+
+    public function orders()
+    {
+     $orders = Order::where('user_id',Auth::id())->get();
+     return view('admin.orders.index',compact('orders'));
     }
 
 }

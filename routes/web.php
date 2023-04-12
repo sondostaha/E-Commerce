@@ -1,15 +1,14 @@
 <?php
 
-use App\Http\Controllers\Admin\HandleAdminController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\ProviderAuth\RegisteredUserController;
 use App\Http\Controllers\AdminAuth\AuthenticatedSessionController;
+use App\Http\Controllers\CkeckOut;
+use App\Http\Controllers\CkeckOutController;
+use App\Http\Controllers\frontend\CheckoutController;
+use App\Http\Controllers\frontend\UserController;
 use App\Http\Controllers\FrontendController;
-use App\Http\Controllers\Provider\ProviderController;
-use App\Http\Controllers\ProviderAuth\AuthenticatedSessionController as ProviderAuthAuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +62,17 @@ Route::middleware('auth')->group(function ()
     Route::get('add/wishlist/product/{id}',[FrontendController::class , 'add_wishlist' ])->name('add.product.add_wishlist');
     //delete wishlist
     Route::get('delete/wish/{id}',[FrontendController::class ,'delete_wish'])->name('delete.wish');
+
+    //checkout
+    Route::get('ckeckout',[CheckoutController::class , 'index'])->name('ckeckout');
+
+    //placeorder
+    Route::post('placeOrder',[CheckoutController::class ,'placeorder'])->name('place_order');
+
+    //orders
+    Route::get('orders',[UserController::class ,'index'])->name('orders');
+    //view order
+    Route::get('show/order/{id}', [UserController::class ,'showOrder'])->name('show.order');
 
                 
 });

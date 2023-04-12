@@ -108,12 +108,10 @@ class FrontendController extends Controller
                 }
                 else
                 {
-                   
-                    
+
                     Favourite::create([
                         'product_id' => $id,
                         'user_id' => Auth::id(),
-                        
 
                     ]);
                     session()->flash('Add',' product added to your wishlist successfully');

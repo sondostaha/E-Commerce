@@ -68,6 +68,8 @@
                         <p class="mt-3">
                             {!!$product->description!!}
                         </p>
+                        
+                      
                         <hr>
                         @if($product->quantity > 0)
                         <label class="badge bg-success">In Stoke</label>
@@ -98,9 +100,13 @@
                             </div>
                             <div class="col-md-10">
                             <br/>
-                                <a type="button" href="{{ route('add.product.add_wishlist',$product->id) }}" class="btn btn-success me-3 float-start">Add To Wishlist <i class="fa fa-heart"></i></a>
-                                <button type="submit"  class="btn btn-primary me-3 float-start" aria-placeholder="Add To Card">Add To Card   <i class="fa fa-shopping-cart"></i></button>
+                            @if($product->quantity > 0)
+                            <button type="submit"  class="btn btn-primary me-3 float-start" aria-placeholder="Add To Card">Add To Card   <i class="fa fa-shopping-cart"></i></button>
+                            <a type="button" href="{{ route('add.product.add_wishlist',$product->id) }}" class="btn btn-success me-3 float-start">Add To Wishlist <i class="fa fa-heart"></i></a>
 
+                            @else
+                                <a type="button" href="{{ route('add.product.add_wishlist',$product->id) }}" class="btn btn-success me-3 float-start">Add To Wishlist <i class="fa fa-heart"></i></a>
+                            @endif
                             </div>
                             <p class="mt-3">
                                 {!!$product->description!!}

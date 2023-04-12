@@ -19,7 +19,6 @@
                         <th class="border-bottom-0">ID</th>
                         <th class="border-bottom-0">User Name</th>
                         <th class="border-bottom-0"> Product Name </th>
-                        <th class="border-bottom-0">Quantity</th>
                         <th class="border-bottom-0">Image</th>
                         <th class="border-bottom-0">Delete</th>
                         <th class="border-bottom-0"></th>
@@ -40,8 +39,7 @@
                         <td>
                             <a href="{{ route('show.products',$wish->product->id) }}">{{$wish->product->name}}</a>
                             </td>
-                        <td>{{$wish->quantity}}</td>
-                     
+                        
                       <td>  <img src="{{ asset('products/'.$wish->product->image) }}" class="w-20"> </td>
                         
                         <td>

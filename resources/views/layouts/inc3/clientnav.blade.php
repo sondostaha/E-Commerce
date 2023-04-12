@@ -24,6 +24,9 @@
             <a class="nav-link" href="{{route('wishlist')}}">WishList</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="{{route('orders')}}">Orders</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="{{route('logout')}}">Log Out</a>
             </li>
 
