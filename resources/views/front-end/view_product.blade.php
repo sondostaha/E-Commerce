@@ -4,9 +4,47 @@
 <h1> E-Commerce  view {{$product->name}}</h1>
 @endsection
 
+@section('head')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@endsection
+
 @section('content')
 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{route('save.rating',$product->id)}}" method="POST">
+                @csrf
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Rate {{$product->name}}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="rating-css">
+                            <div class="rate">
+                                <input type="radio" id="star5" name="product_rating" value="5" />
+                                <label for="star5"  title="text">5 stars</label>
+                                <input type="radio" id="star4" name="product_rating" value="4" />
+                                <label for="star4" title="text">4 stars</label>
+                                <input type="radio" id="star3" name="product_rating" value="3" />
+                                <label for="star3" title="text">3 stars</label>
+                                <input type="radio" id="star2" name="product_rating" value="2" />
+                                <label for="star2" title="text">2 stars</label>
+                                <input type="radio" id="star1" name="product_rating" value="1" />
+                                <label for="star1" title="text">1 star</label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submint" class="btn btn-primary">Submit</button>
+                    </div>
 
+            </form>
+
+        </div>
+        </div>
+    </div>
 
    <div class="py-3 mb-4 shadow-sm by-warning border-top">
     <div class="container">
@@ -65,6 +103,27 @@
                         <hr>
                         <label class="me-3">Original Price : <s>Egp{{$product->original_price}}</s></label>
                         <label class="fw-bold">Selling Price : Egp{{$product->selling_price}}</label>
+                        @php
+                            $ratenum = number_format($rating_value)
+                        @endphp
+                        <div class="rate">
+                     
+
+                            @for ($i = 0 ; $i <= $rating_value ;$i++ )
+                            <input type="radio" value="{{$i}}" checked id="star{{$i}}"/>
+                            <label for="star{{$i}}"  title="text"></label>
+                            @endfor
+                            @for ($j = $rating_value+1 ; $j <= 5 ; $j++ )
+                            <i class="fa fa-star"></i>
+                            @endfor
+                            @if($rating->count() > 0)
+                            <span>{{$rating->count()}}Rating</span> 
+
+                            @else
+                            <span> No Rating yet </span> 
+
+                            @endif
+                        </div>
                         <p class="mt-3">
                             {!!$product->description!!}
                         </p>
@@ -76,6 +135,12 @@
                         @else
                         <label class="badge bg-danger">Out Of Stoke</label>
                         @endif
+
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Rate this product
+                          </button>
+
+                       
                         <div class="row mt-2">
 
                             <div class="col-md-2">
@@ -83,7 +148,6 @@
                                 <select name="quantity" id="quantity"  class="form-control" onchange="myFunction()">
                                     <!--placeholder-->
                                     <option value="0" selected disabled>0</option>
-                                    
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -94,8 +158,6 @@
                                     <option value="8">8</option>
                                     <option value="9">9</option>
                                     <option value="10">10</option>
-        
-                                    
                                 </select>
                             </div>
                             <div class="col-md-10">

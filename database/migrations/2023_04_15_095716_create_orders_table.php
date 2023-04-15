@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('payment_id')->constrained('payments')->cascadeOnDelete();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email');
@@ -28,7 +29,7 @@ return new class extends Migration
             $table->string('pin_code');
             $table->tinyInteger('status')->default('0');
             $table->string('message')->nullable();
-            $table->string('tarking_number')->nullable();
+            $table->string('traking_number')->nullable();
             $table->timestamps();
         });
     }

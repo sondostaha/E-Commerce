@@ -7,6 +7,7 @@ use App\Models\Categories;
 use App\Models\Favourite;
 use App\Models\Product;
 use App\Models\ProductDetails;
+use App\Models\RatingProduct;
 use App\Models\SubCategories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -53,8 +54,19 @@ class FrontendController extends Controller
     {
         $product = Product::findOrFail($id);
         $product['productdetail'] = ProductDetails::where('product_id',$id)->get();
+        $rating = RatingProduct::where('product_id' , $id)->get();
+        $rating_sum  = RatingProduct::where('product_id' , $id)->sum('product_rating');
 
-        return view('front-end.view_product',compact('product'));
+        if($rating->count() > 0)
+        {
+            $rating_value = $rating_sum  /  $rating->count() ;
+        }
+        else
+        {
+            $rating_value = 0 ;
+        }
+
+        return view('front-end.view_product',compact('product','rating','rating_value'));
     }
 
     public function addToCart($id, Request $request)

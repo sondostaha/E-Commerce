@@ -74,6 +74,13 @@ Route::middleware('auth')->group(function ()
     //view order
     Route::get('show/order/{id}', [UserController::class ,'showOrder'])->name('show.order');
 
+    //payment
+    Route::get('payment/{totalprice}',[CheckoutController::class ,'select_payment'])->name('select.payment');
+    Route::post('stripe/{totalprice}', [CheckoutController::class ,'stripePost'])->name('stripe.post');
+
+    //Rateing_product
+    Route::post('rating/{product_id}',[UserController::class ,'rating_product'])->name('save.rating');
+
                 
 });
 

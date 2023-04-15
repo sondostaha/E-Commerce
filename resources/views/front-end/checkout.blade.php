@@ -38,6 +38,8 @@
                         <hr>
                             <div class="row">
                                 <div class="col-md-6">
+                                  
+
                                     <label for="first_name">First Name</label>
                                     <input type="text" name="first_name" value="{{Auth::user()->name}}" class="form-control" placeholder="First name">
                                 </div>
@@ -119,7 +121,8 @@
                         
                         </table>
                         <br>
-                        <button type="submit" class="btn btn-success">Place Order</button>
+                        <button type="submit" class="btn btn-success w-100 mt-3">Place Order</button>
+                        <a href="{{route('select.payment',$total)}}" class="btn btn-primary w-100 mt-3">Payment</a>
 
                         @else
                         <h1>there is no orders yet</h1>
