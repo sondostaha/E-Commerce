@@ -81,6 +81,9 @@ Route::middleware('auth')->group(function ()
     //Rateing_product
     Route::post('rating/{product_id}',[UserController::class ,'rating_product'])->name('save.rating');
 
+    //search
+    Route::get('search',[UserController::class, 'search'])->name('search.all');
+
                 
 });
 

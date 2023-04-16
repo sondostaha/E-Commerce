@@ -1,7 +1,7 @@
-@extends('layouts.frontend')
+@extends('layouts.provider')
 
 @section('title')
-<h1> E-Commerce  orders</h1>
+ Orders
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
             <div class="card">
                 <div class="card-header">
                     <h6>My Orders</h6>
-                    <a href="{{ route('orders') }}" class="btn btn-warning text-white float-end">Back</a>
+                    <a href="{{ route('pallorders') }}" class="btn btn-warning text-white float-end">Back</a>
                 </div>
                <div class="card-body">
                 <div class="row">

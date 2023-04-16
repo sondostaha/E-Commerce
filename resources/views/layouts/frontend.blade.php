@@ -35,14 +35,10 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
-        @guest
+
      @include('layouts.inc3.frontendnav')
             
-        @endguest
-
-        @auth
-            @include('layouts.inc3.clientnav')
-        @endauth
+       
   <div class="wrapper ">
    
         <div class="content">

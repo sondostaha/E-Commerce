@@ -79,7 +79,9 @@ Route::group([ 'middleware' => ['auth:provider', 'verified'] , 'prefix' => 'prov
 
     });
     
-    
+    //order 
+    Route::get('orders',[ProviderController::class , 'orders'])->name('pallorders');
+    Route::get('show/order/{id}', [ProviderController::class ,'showOrder'])->name('pshow.order');
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                     ->name('provider.logout');

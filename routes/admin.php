@@ -79,7 +79,9 @@ Route::group([ 'middleware' => ['auth:admin', 'verified'] , 'prefix' => 'admin' 
             });
 
             //order 
-            Route::get('orders',[AdminController::class , 'orders'])->name('allorders');
+            Route::get('orders',[AdminController::class , 'orders'])->name('aallorders');
+            Route::get('show/order/{id}', [AdminController::class ,'showOrder'])->name('ashow.order');
+            //view order
            
         
            

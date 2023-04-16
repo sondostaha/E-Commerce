@@ -3,13 +3,19 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\Carts;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Payment;
 use App\Models\Product;
+use App\Models\Provider;
+use App\Models\User;
+use App\Notifications\AdminNotification;
+use App\Notifications\ProviderNotificaion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Session;
 use Stripe;
      
@@ -48,7 +54,7 @@ class CheckoutController extends Controller
       
         Session::flash('success', 'Payment successful!');
               
-        return route('place_order');
+        return route('ckeckout');
     }
 
     public function placeOrder(Request $request)
@@ -121,6 +127,30 @@ class CheckoutController extends Controller
 
         }
 
+        $adminSchema = Admin::first();
+
+        $order_id = Order::latest()->first()->id;
+        //admin notificaion
+        $adminData = [
+            'body' => 'User Make a New Order',
+            'user' => Auth::user()->name,
+            'url' => url(route('show.order',$order_id)),
+            'order_id' => $order_id
+        ];
+         Notification::send($adminSchema,new AdminNotification($adminData));
+
+
+         $providerSchema = Provider::first();
+
+       //provider notification
+       $providerData = [
+        'body' => 'User Make a New Order',
+        'user' => Auth::user()->name,
+        'url' => url(route('pshow.order',$order_id)),
+        'order_id' => $order_id
+    ];
+
+       Notification::send($providerSchema,new ProviderNotificaion($providerData));
 
         session()->flash('Add' ,'Place Order Successfully');
 

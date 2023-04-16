@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Categories;
 use App\Models\Order;
+use App\Models\OrderDetails;
 use App\Models\SubCategories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -197,8 +198,15 @@ class AdminController extends Controller
 
     public function orders()
     {
-     $orders = Order::where('user_id',Auth::id())->get();
+     $orders = Order::all();
      return view('admin.orders.index',compact('orders'));
     }
 
+    public function showOrder($id)
+    {
+     $orders = Order::with('order_detail')->where('id',$id)->first();
+     $orders['orderdetail'] = OrderDetails::with('products')->where('order_id',$id)->get();
+    // dd($orders);
+     return view('admin.orders.show',compact('orders'));
+    }
 }

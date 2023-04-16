@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categories;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Product;
 use App\Models\RatingProduct;
+use App\Models\SubCategories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -53,4 +55,22 @@ class UserController extends Controller
       session()->flash('Add', 'Thank you for rating our product');
       return back();
    }
+
+   public function search(Request $request)
+   {
+      if($request->search){
+         $categories =  Categories::with('sub_category')->where('name','like','%'.$request->search.'%')->get();
+         $sub_categories =  SubCategories::with('category','products')->where('name','like','%'.$request->search.'%')->get();
+         $products =  Product::with('sub_category')->where('name','like','%'.$request->search.'%')->get();
+      
+         return view('front-end.index',compact('categories','sub_categories','products'));
+        
+
+      }else{
+         return redirect()->back()->with('message',' Not found');
+     }
+
+   }
+
+
 }

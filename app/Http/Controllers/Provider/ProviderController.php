@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Provider;
 
 use App\Http\Controllers\Controller;
 use App\Models\Categories;
+use App\Models\Order;
+use App\Models\OrderDetails;
 use App\Models\Product;
 use App\Models\ProductDetails;
 use App\Models\SubCategories;
@@ -144,6 +146,20 @@ class ProviderController extends Controller
         //$details = ProductDetails::with('products')->where('product_id',$id)->get();
         //dd($product);
         return view('provider.products.show',compact('product'));
+    }
+
+    public function orders()
+    {
+     $orders = Order::all();
+     return view('provider.orders.index',compact('orders'));
+    }
+
+    public function showOrder($id)
+    {
+     $orders = Order::with('order_detail')->where('id',$id)->first();
+     $orders['orderdetail'] = OrderDetails::with('products')->where('order_id',$id)->get();
+    // dd($orders);
+     return view('provider.orders.show',compact('orders'));
     }
 
 }

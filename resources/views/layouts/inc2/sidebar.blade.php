@@ -29,6 +29,13 @@
             <p>Add Products</p>
           </a>
         </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="{{ route('pallorders') }}">
+            <i class="material-icons">Order</i>
+            <p>All Orders</p>
+          </a>
+        </li>
+        
 
         <li class="nav-item ">
           <a class="nav-link" href="./rtl.html">

@@ -10,7 +10,7 @@
     <div class="sidebar-wrapper">
       <ul class="nav">
         <li class="nav-item active  ">
-          <a class="nav-link" href="./dashboard.html">
+          <a class="nav-link" href="{{ route('admin.dashboard') }}">
             <i class="material-icons">dashboard</i>
             <p>Dashboard</p>
           </a>
@@ -85,7 +85,7 @@
         @endcan
 
         <li class="nav-item ">
-          <a class="nav-link" href="{{ route('allorders') }}">
+          <a class="nav-link" href="{{ route('aallorders') }}">
             <i class="material-icons">Orders</i>
             <p>Orders</p>
           </a>

@@ -34,10 +34,19 @@
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">{{Auth::user()->name}}</a>
           </li>
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        <form method="GET" action="{{ route('search.all') }}">
+          <div class="input-group mb-3">
+            <input 
+              type="text" 
+              name="search" 
+             value="{{ request()->get('search') }}"
+              class="form-control" 
+              placeholder="Search..." 
+              aria-label="Search" 
+              aria-describedby="button-addon2">
+            <button class="btn btn-success" type="submit" id="button-addon2">Search</button>
+          </div>
+      </form>
       </div>
     </div>
   </nav>
