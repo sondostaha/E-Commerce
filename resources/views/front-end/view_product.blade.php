@@ -136,9 +136,7 @@
                         <label class="badge bg-danger">Out Of Stoke</label>
                         @endif
 
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            Rate this product
-                          </button>
+                       
 
                        
                         <div class="row mt-2">
@@ -173,7 +171,20 @@
                             <p class="mt-3">
                                 {!!$product->description!!}
                             </p>
+                           
                             </div>
+                            <a type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Rate this product
+                              </a>
+                            <a type="button" class="btn btn-link" href="{{ route('add.review',$product->id) }}">
+                            Review this product
+                            </a>
+                        </div>
+
+                        <div class="mt-3">
+                            <h1>All Reviews</h1>
+                           <h2>{{$reviews->user->name}} : <p>{{$reviews->user_review}}</p></h2>
+                           
                         </div>
 
 

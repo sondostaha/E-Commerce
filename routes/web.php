@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminAuth\AuthenticatedSessionController;
 use App\Http\Controllers\CkeckOut;
 use App\Http\Controllers\CkeckOutController;
 use App\Http\Controllers\frontend\CheckoutController;
+use App\Http\Controllers\frontend\ReviewController;
 use App\Http\Controllers\frontend\UserController;
 use App\Http\Controllers\FrontendController;
 
@@ -83,6 +84,10 @@ Route::middleware('auth')->group(function ()
 
     //search
     Route::get('search',[UserController::class, 'search'])->name('search.all');
+
+    //review
+    Route::get('review/{product_id}',[ReviewController::class ,'add'])->name('add.review');
+    Route::post('save/review/{product_id}',[ReviewController::class ,'store'])->name('store.review');
 
                 
 });

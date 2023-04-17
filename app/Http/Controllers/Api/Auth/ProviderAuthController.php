@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Provider;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
-class AuthController extends Controller
+
+class ProviderAuthController extends Controller
 {
     public function register(Request $request)
     {
@@ -26,16 +26,17 @@ class AuthController extends Controller
         }
         else
         {
-           $provider  = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
+           // dd($request->all());
+          Provider::create([
+                'name' => $request->name ,
+                'email' => $request->email ,
+                'password' => Hash::make($request->password) ,
             ]);
 
             $access_token = Str::random(65);
 
             return response()->json([
-                'message' => 'Welcome Now provider'.$provider,
+                'message' => 'Welcome Now provider',
                 'access_token' => $access_token ,
             ]);
            
@@ -44,7 +45,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $validateData = Validator::make($request->all(),[
-            'email' => 'required|max:50',
+            'email' => 'required|email',
             'passsword' => 'required'
         ]);
 
@@ -53,9 +54,9 @@ class AuthController extends Controller
             return response()->json(['message' => 'UnAuthorized',401]);
         }else
         {
-            $cradintional = request(['email','password']);
+            $credentional = request(['email','password']);
 
-            $token = auth('api')->attempt($cradintional);
+            $token = auth('provider_api')->attempt($credentional);
 
             if(!$token)
             {
@@ -63,7 +64,7 @@ class AuthController extends Controller
             }
 
             return response()->json([
-                'message' => 'Welcome Back',
+                'message' => 'Welcome Back Provider',
                 'access_token' => $token
             ]);
 
@@ -72,7 +73,7 @@ class AuthController extends Controller
 
     public function logout()
     {
-        auth('api')->logout();
+        auth('provider_api')->logout();
         return response()->json(['error' => false , 'message' => 'Logout Successfully']);
     }
 }
