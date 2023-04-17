@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\frontend;
 
+use App\Http\Controllers\Controller;
 use App\Models\Carts;
 use App\Models\Categories;
 use App\Models\Favourite;

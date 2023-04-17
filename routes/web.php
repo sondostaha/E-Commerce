@@ -7,9 +7,10 @@ use App\Http\Controllers\AdminAuth\AuthenticatedSessionController;
 use App\Http\Controllers\CkeckOut;
 use App\Http\Controllers\CkeckOutController;
 use App\Http\Controllers\frontend\CheckoutController;
+use App\Http\Controllers\frontend\FrontendController ;
 use App\Http\Controllers\frontend\ReviewController;
 use App\Http\Controllers\frontend\UserController;
-use App\Http\Controllers\FrontendController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -45,24 +46,29 @@ Route::middleware('auth')->group(function ()
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('logout', [AuthenticatedSessionController::class, 'destroy']) ->name('logout');
    
+    Route::prefix('Carts')->group(function(){
+        //cart
+        Route::get('/',[FrontendController::class ,'cart' ])->name('allcart');
+        //add to card
+        Route::post('add/products/{id}',[FrontendController::class , 'addToCart' ])->name('add.product.cart');
+        //edite 
+        Route::get('edite/products/{id}',[FrontendController::class , 'edite_cart'])->name('edite.cart');
+        Route::post('update/products/{id}',[FrontendController::class , 'update_cart'])->name('update.cart');
 
-    //cart
-    Route::get('carts',[FrontendController::class ,'cart' ])->name('allcart');
-    //add to card
-    Route::post('add/cart/product/{id}',[FrontendController::class , 'addToCart' ])->name('add.product.cart');
-    //edite 
-    Route::get('edite/cart/{id}',[FrontendController::class , 'edite_cart'])->name('edite.cart');
-    Route::post('update/cart/{id}',[FrontendController::class , 'update_cart'])->name('update.cart');
+        //delete cart
+        Route::get('delete/products/{id}',[FrontendController::class ,'delete_cart'])->name('delete.cart');
 
-    //delete cart
-    Route::get('delete/cart/{id}',[FrontendController::class ,'delete_cart'])->name('delete.cart');
-
-    //wishlist
-    Route::get('wishlist',[FrontendController::class ,'wishlist' ])->name('wishlist');
-    //add wishlist
-    Route::get('add/wishlist/product/{id}',[FrontendController::class , 'add_wishlist' ])->name('add.product.add_wishlist');
-    //delete wishlist
-    Route::get('delete/wish/{id}',[FrontendController::class ,'delete_wish'])->name('delete.wish');
+    });
+    Route::prefix('wishlist')->group(function(){
+        //wishlist
+        Route::get('/',[FrontendController::class ,'wishlist' ])->name('wishlist');
+        //add wishlist
+        Route::get('add/products/{id}',[FrontendController::class , 'add_wishlist' ])->name('add.product.add_wishlist');
+        //delete wishlist
+        Route::get('delete/products/{id}',[FrontendController::class ,'delete_wish'])->name('delete.wish');
+        });
+    
+    
 
     //checkout
     Route::get('ckeckout',[CheckoutController::class , 'index'])->name('ckeckout');
