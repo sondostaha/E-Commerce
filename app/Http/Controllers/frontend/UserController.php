@@ -27,50 +27,6 @@ class UserController extends Controller
     return view('front-end.show_order',compact('orders'));
    }
 
-   public function rating_product($product_id , Request $request)
-   {
-     // dd($request->product_rating);
-      $product = Product::findOrFail($product_id);
-      $rating = RatingProduct::where('user_id',Auth::id())->where('product_id',$product_id)->first();
-
-      if( $rating )
-      {
-        
-         $rating->update([
-            'product_rating' => $request->product_rating
-         ]);
-      }
-      else
-      {
-          RatingProduct::create([
-            'user_id' => Auth::id(),
-            'product_id' => $product_id,
-            'product_rating' => $request->product_rating
-         ]);   
-
-     
-      }
-
-     
-      session()->flash('Add', 'Thank you for rating our product');
-      return back();
-   }
-
-   public function search(Request $request)
-   {
-      if($request->search){
-         $categories =  Categories::with('sub_category')->where('name','like','%'.$request->search.'%')->get();
-         $sub_categories =  SubCategories::with('category','products')->where('name','like','%'.$request->search.'%')->get();
-         $products =  Product::with('sub_category')->where('name','like','%'.$request->search.'%')->get();
-      
-         return view('front-end.index',compact('categories','sub_categories','products'));
-        
-
-      }else{
-         return redirect()->back()->with('message',' Not found');
-     }
-
-   }
-
+  
 
 }

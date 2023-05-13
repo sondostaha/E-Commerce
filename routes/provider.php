@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\frontend\FrontendController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\FrontendController;
+
+use App\Http\Controllers\Provider\OrdersController;
+use App\Http\Controllers\Provider\ProductDetailsController;
+use App\Http\Controllers\Provider\ProductsController;
 use App\Http\Controllers\Provider\ProviderController;
 use App\Http\Controllers\ProviderAuth\RegisteredUserController;
 use App\Http\Controllers\ProviderAuth\AuthenticatedSessionController;
@@ -58,30 +62,32 @@ Route::group([ 'middleware' => ['auth:provider', 'verified'] , 'prefix' => 'prov
 
     Route::prefix('products')->group(function()
     {
-        Route::get('show/{id}',[ProviderController::class ,'show_details'])->name('show.details');
         //craete products
 
-        Route::get('add' ,[ProviderController::class , 'add_products'])->name('add.products');
-        Route::post('store',[ProviderController::class , 'store_products'])->name('store.products');
+        Route::get('add' ,[ProductsController::class , 'add'])->name('add.products');
+        Route::post('store',[ProductsController::class , 'store'])->name('store.products');
 
         //edite product
-        Route::get('edite/{id}',[ProviderController::class ,'edit_product'])->name('edite.product');
-        Route::post('update/{id}',[ProviderController::class, 'update_product' ])->name('upadet.product');
+        Route::get('edite/{id}',[ProductsController::class ,'edite'])->name('edite.product');
+        Route::post('update/{id}',[ProductsController::class, 'update' ])->name('upadet.product');
 
         //delete product
-        Route::get('delete/{id}',[ProviderController::class ,'delete_product' ])->name('delete.product');
+        Route::get('delete/{id}',[ProductsController::class ,'delete' ])->name('delete.product');
 
         //add details
-        Route::get('details/{id}',[ProviderController::class ,'product_details'])->name('add.product.details');
-        Route::post('store/{id}',[ProviderController::class , 'store_details'])->name('store.details');
+        Route::get('details/{id}',[ProductsController::class ,'show'])->name('add.product.details');
+
+        Route::get('show/{id}',[ProductDetailsController::class ,'show'])->name('show.details');
+
+        Route::post('store/{id}',[ProductDetailsController::class , 'store'])->name('store.details');
 
         
 
     });
     
     //order 
-    Route::get('orders',[ProviderController::class , 'orders'])->name('pallorders');
-    Route::get('show/order/{id}', [ProviderController::class ,'showOrder'])->name('pshow.order');
+    Route::get('orders',[OrdersController::class , 'index'])->name('pallorders');
+    Route::get('show/order/{id}', [OrdersController::class ,'show'])->name('pshow.order');
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                     ->name('provider.logout');

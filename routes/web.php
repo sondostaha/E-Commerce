@@ -6,11 +6,17 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminAuth\AuthenticatedSessionController;
 use App\Http\Controllers\CkeckOut;
 use App\Http\Controllers\CkeckOutController;
-use App\Http\Controllers\frontend\CheckoutController;
-use App\Http\Controllers\frontend\FrontendController ;
-use App\Http\Controllers\frontend\ReviewController;
-use App\Http\Controllers\frontend\UserController;
+use App\Http\Controllers\frontend\CardController;
 
+use App\Http\Controllers\frontend\CheckoutController;
+use App\Http\Controllers\frontend\CradController;
+use App\Http\Controllers\frontend\FrontendController;
+use App\Http\Controllers\frontend\RatingController;
+use App\Http\Controllers\frontend\ReviewController;
+use App\Http\Controllers\frontend\SearchController;
+use App\Http\Controllers\frontend\UserController;
+use App\Http\Controllers\frontend\WishListController;
+use App\Models\RatingProduct;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,24 +54,24 @@ Route::middleware('auth')->group(function ()
    
     Route::prefix('Carts')->group(function(){
         //cart
-        Route::get('/',[FrontendController::class ,'cart' ])->name('allcart');
+        Route::get('/',[CradController::class ,'index' ])->name('allcart');
         //add to card
-        Route::post('add/products/{id}',[FrontendController::class , 'addToCart' ])->name('add.product.cart');
+        Route::post('add/products/{id}',[CradController::class , 'add' ])->name('add.product.cart');
         //edite 
-        Route::get('edite/products/{id}',[FrontendController::class , 'edite_cart'])->name('edite.cart');
-        Route::post('update/products/{id}',[FrontendController::class , 'update_cart'])->name('update.cart');
+        Route::get('edite/products/{id}',[CradController::class , 'edite'])->name('edite.cart');
+        Route::post('update/products/{id}',[CradController::class , 'update'])->name('update.cart');
 
         //delete cart
-        Route::get('delete/products/{id}',[FrontendController::class ,'delete_cart'])->name('delete.cart');
+        Route::get('delete/products/{id}',[CradController::class ,'delete'])->name('delete.cart');
 
     });
     Route::prefix('wishlist')->group(function(){
         //wishlist
-        Route::get('/',[FrontendController::class ,'wishlist' ])->name('wishlist');
+        Route::get('/',[WishListController::class ,'index' ])->name('wishlist');
         //add wishlist
-        Route::get('add/products/{id}',[FrontendController::class , 'add_wishlist' ])->name('add.product.add_wishlist');
+        Route::get('add/products/{id}',[WishListController::class , 'add' ])->name('add.product.add_wishlist');
         //delete wishlist
-        Route::get('delete/products/{id}',[FrontendController::class ,'delete_wish'])->name('delete.wish');
+        Route::get('delete/products/{id}',[WishListController::class ,'delete'])->name('delete.wish');
         });
     
     
@@ -86,13 +92,13 @@ Route::middleware('auth')->group(function ()
     Route::post('stripe/{totalprice}', [CheckoutController::class ,'stripePost'])->name('stripe.post');
 
     //Rateing_product
-    Route::post('rating/{product_id}',[UserController::class ,'rating_product'])->name('save.rating');
+    Route::post('rating/{product_id}',[RatingController::class ,'rating_product'])->name('save.rating');
 
     //search
-    Route::get('search',[UserController::class, 'search'])->name('search.all');
+    Route::get('search',[SearchController::class, 'search'])->name('search.all');
 
     //review
-    Route::get('review/{product_id}',[ReviewController::class ,'add'])->name('add.review');
+    Route::get('review/{product_id}',[ReviewController::class ,'add'])->name('add.review');                                                                               
     Route::post('save/review/{product_id}',[ReviewController::class ,'store'])->name('store.review');
 
                 

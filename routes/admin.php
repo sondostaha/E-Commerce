@@ -4,11 +4,13 @@ use App\Http\Controllers\Admin\HandleAdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\OrdersController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\ProviderAuth\RegisteredUserController;
 use App\Http\Controllers\AdminAuth\AuthenticatedSessionController;
-use App\Http\Controllers\FrontendController;
-
+use App\Http\Controllers\frontend\FrontendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,35 +54,35 @@ Route::group([ 'middleware' => ['auth:admin', 'verified'] , 'prefix' => 'admin' 
             //categories
             Route::prefix('categories')->group(function()
             {
-                Route::get('/',[AdminController::class ,'adminCategry'])->name('admin.category');
+                Route::get('/',[CategoryController::class ,'index'])->name('admin.category');
                 //add category
-                Route::get('add',[AdminController::class ,'addCategory'])->name('admin.addCategory');
-                Route::post('store' , [AdminController::class , 'store'])->name('admistore.category');
-                Route::post('save' , [AdminController::class , 'store'])->name('admin.save.category');
+                Route::get('add',[CategoryController::class ,'add'])->name('admin.addCategory');
+                Route::post('store' , [CategoryController::class , 'store'])->name('admistore.category');
+                Route::post('save' , [CategoryController::class , 'store'])->name('admin.save.category');
             
                 //edite category
-                Route::get('edite/{id}',[AdminController::class ,'edite'])->name('edit.category');
-                Route::post('update/{id}',[AdminController::class ,'update'])->name('update.category');
+                Route::get('edite/{id}',[CategoryController::class ,'edite'])->name('edit.category');
+                Route::post('update/{id}',[CategoryController::class ,'update'])->name('update.category');
                 //delete category
-                Route::get('delete/{id}',[AdminController::class ,'delete'])->name('delete.category');
+                Route::get('delete/{id}',[CategoryController::class ,'delete'])->name('delete.category');
             });
 
             //sub_categories
             Route::prefix('sub_categories')->group(function()
             {
-                Route::get('/', [AdminController::class , 'subCategories'])->name('admin.sub_categories');
-                Route::get('add/',[AdminController::class ,'addSubCategory'])->name('admin.add.sub_categories');
-                Route::post('store' , [ AdminController::class , 'storeSubCategroy' ])->name('store.subcategories');
+                Route::get('/', [SubCategoryController::class , 'index'])->name('admin.sub_categories');
+                Route::get('add/',[SubCategoryController::class ,'add'])->name('admin.add.sub_categories');
+                Route::post('store' , [ SubCategoryController::class , 'store' ])->name('store.subcategories');
                 //edite category
-                Route::get('edite/{id}',[AdminController::class ,'edit_subCategories'])->name('edit.sub_category');
-                Route::post('update/{id}',[AdminController::class ,'update_subCategories'])->name('update.sub_category');
+                Route::get('edite/{id}',[SubCategoryController::class ,'edite'])->name('edit.sub_category');
+                Route::post('update/{id}',[SubCategoryController::class ,'update'])->name('update.sub_category');
                 //delete sub category
-                Route::get('delete/{id}',[AdminController::class ,'deleteSubCategories'])->name('delete.sub_category');
+                Route::get('delete/{id}',[SubCategoryController::class ,'delete'])->name('delete.sub_category');
             });
 
             //order 
-            Route::get('orders',[AdminController::class , 'orders'])->name('aallorders');
-            Route::get('show/order/{id}', [AdminController::class ,'showOrder'])->name('ashow.order');
+            Route::get('orders',[OrdersController::class , 'index'])->name('aallorders');
+            Route::get('show/order/{id}', [OrdersController::class ,'show'])->name('ashow.order');
             //view order
            
         
